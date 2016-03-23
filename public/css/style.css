@@ -1,0 +1,180 @@
+body {
+  margin: 0;
+  padding: 0;
+  background: #ffffff;
+}
+
+a:link {
+    text-decoration: none;
+}
+
+h1 {
+  text-align: center;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 50px;  
+}
+
+.center {
+  text-align: center;
+}
+
+.index-nav ul {
+  list-style: none;
+  background-color: #3399ff;
+  text-align: center;
+  padding: 0;
+  margin: 0;
+}
+.index-nav li {
+  display:inline-block;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 1.2em;
+  line-height: 40px;
+  height: 40px;
+  border-bottom: 1px solid #888;
+}
+
+.index-nav a {
+  text-decoration: none;
+  color: #fff;
+  display: block;
+  transition: .3s background-color;
+}
+
+.index-nav a:hover {
+  background-color: #66ccff;
+}
+ 
+.index-nav a.active {
+  background-color: #fff;
+  color: #444;
+  cursor: default;
+}
+ 
+@media screen and (min-width: 600px) {
+  .index-nav li {
+    width: 120px;
+    border-bottom: none;
+    height: 50px;
+    line-height: 50px;
+    font-size: 1.4em;
+  }
+ 
+  /* Option 1 - Display Inline */
+  .index-nav li {
+    display: inline-block;
+    margin-right: -4px;
+  }
+
+/* ------------------------------------------- */
+
+.nav ul {
+  list-style: none;
+  background-color: #444;
+  text-align: center;
+  padding: 0;
+  margin: 0;
+}
+.nav li {
+  font-family: 'Open Sans', sans-serif;
+  font-size: 1.2em;
+  line-height: 40px;
+  height: 40px;
+  border-bottom: 1px solid #888;
+}
+ 
+.nav a {
+  text-decoration: none;
+  color: #fff;
+  display: block;
+  transition: .3s background-color;
+}
+ 
+.nav a:hover {
+  background-color: #66ccff;
+}
+ 
+.nav a.active {
+  background-color: #fff;
+  color: #444;
+  cursor: default;
+}
+ 
+@media screen and (min-width: 600px) {
+  .nav li {
+    width: 120px;
+    border-bottom: none;
+    height: 50px;
+    line-height: 50px;
+    font-size: 1.4em;
+  }
+ 
+  /* Option 1 - Display Inline */
+  .nav li {
+    display: inline-block;
+    margin-right: -4px;
+  }
+
+.project-name {
+  text-align: center;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 24px;
+}
+
+h1.section {
+  text-align: center;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 24px;
+}
+
+p.section {
+  text-align: center;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 16px;
+  padding-left: 10%;
+  padding-right: 10%;
+}
+
+li.faq {
+  display:inline-block;
+  width: 33%;
+  text-align: center;
+}
+
+h1.faq {
+  text-align: center;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 16px;  
+}
+
+p.faq {
+  text-align: center;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 12px;  
+}
+
+.myButton {
+  background-color:#3399ff;
+  -moz-border-radius:28px;
+  -webkit-border-radius:28px;
+  cursor:pointer;
+  color:#ffffff;
+  font-family: 'Open Sans', sans-serif;
+  font-size:20px;
+  padding:16px 31px;
+  text-decoration:none;
+  margin: 0 auto;
+}
+.myButton:hover {
+  background-color:#66ccff;
+}
+
+.login {
+  padding-bottom: 50px;
+}
+
+img {
+    width: 100%;
+    margin: 0 auto;
+}
+

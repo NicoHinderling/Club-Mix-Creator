@@ -1,0 +1,30 @@
+<!-- views/pages/index.ejs -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <% include ../partials/head %>
+</head>
+<body class="container">
+
+<header>
+    <% include ../partials/header %>
+</header>
+
+<h1> Results: </h1>
+<% if (locals.results) { %>
+  <% for(var i=0; i<results.length; i++) { %>
+    <li>
+      <a href='songSearch/<%= results[i].id %>'>
+        <%= results[i]['title'] + ", " + results[i]['artist_name'] %>
+      </a> 
+    </li>
+  <% } %>
+<% } %>
+
+<footer>
+    <% include ../partials/footer %>
+</footer>
+
+</body>
+</html>

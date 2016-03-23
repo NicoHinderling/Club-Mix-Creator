@@ -1,0 +1,36 @@
+<!-- views/pages/index.ejs -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <% include ../partials/head %>
+</head>
+<body class="container">
+
+<header>
+    <% include ../partials/header %>
+</header>
+
+<main>
+  <!-- show any messages that come back with authentication -->
+    <div class="alert alert-success">
+      <% if (message.length > 0) { %>
+         <%= message %>
+      <% } %>
+    </div>
+  <h1> Routes </h1>
+
+  <a href="http://127.0.0.1:3000">Route "http://127.0.0.1:3000"</a>
+  <br>
+  <a href="http://127.0.0.1:3000/login">Route "http://127.0.0.1:3000/login"</a>
+  <br>
+  <a href="http://127.0.0.1:3000/lookup">Route "http://127.0.0.1:3000/lookup"</a>
+</main>
+
+
+<footer>
+    <% include ../partials/footer %>
+</footer>
+
+</body>
+</html>
