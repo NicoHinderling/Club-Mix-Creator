@@ -1,0 +1,23 @@
+{
+  "name": "club-mix-creator",
+  "version": "1.0.0",
+  "description": "Robo Disc Jockey",
+  "main": "app.js",
+  "dependencies": {
+    "echojs": "^0.1.4"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "start": "node app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/NicoHinderling/Club-Mix-Creator.git"
+  },
+  "author": "Nico Hinderling, Ryan Walsh, Addy Camp, & Jasmine Hu",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/NicoHinderling/Club-Mix-Creator/issues"
+  },
+  "homepage": "https://github.com/NicoHinderling/Club-Mix-Creator#readme"
+}
