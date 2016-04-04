@@ -10,7 +10,7 @@ var express  = require('express')
   , cookieParser = require('cookie-parser')
   , bodyParser   = require('body-parser')
   , session      = require('express-session')
-  // , configDB = require('./config/database.js')
+  , configDB = require('./config/database.js')
   , port     = process.env.PORT || 3000
   , echo = echojs({ key: process.env.ECHONEST_KEY });
 
@@ -18,7 +18,7 @@ var express  = require('express')
 app.set('view engine', 'ejs');
 app.use(express.static("public"));
 
-// mongoose.connect(configDB.url);
+mongoose.connect(configDB.url);
 require('./config/passport')(passport);
 app.use(morgan('dev'));
 app.use(cookieParser());

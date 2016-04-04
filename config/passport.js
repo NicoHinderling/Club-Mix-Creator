@@ -1,10 +1,10 @@
 // config/passport.js
 
 // load all the things we need
-var LocalStrategy   = require('passport-local').Strategy;
+var LocalStrategy = require('passport-local').Strategy;
 
 // load up the user model
-var User            = require('../models/user');
+var User = require('../models/user');
 
 // expose this function to our app using module.exports
 module.exports = function(passport) {
@@ -40,11 +40,9 @@ module.exports = function(passport) {
         passReqToCallback : true // allows us to pass back the entire request to the callback
     },
     function(req, email, password, done) {
-
-        // asynchronous
-        // User.findOne wont fire unless data is sent back
+        // asynchronous: User.findOne wont fire unless data is sent back
         process.nextTick(function() {
-
+            console.log("bruh");
         // find a user whose email is the same as the forms email
         // we are checking to see if the user trying to login already exists
             User.findOne({ 'local.email' :  email }, function(err, user) {
@@ -57,9 +55,8 @@ module.exports = function(passport) {
                     return done(null, false, req.flash('signupMessage', 'That email is already taken.'));
                 } else {
 
-                    // if there is no user with that email
-                    // create the user
-                    var newUser            = new User();
+                    // if there is no user with that email, create the user
+                    var newUser = new User();
 
                     // set the user's local credentials
                     newUser.local.email    = email;
