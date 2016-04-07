@@ -2,11 +2,13 @@
 
 module.exports = function(echo, app, passport) {
 
+    // ROUTE: / (Default)
     app.get('/', function(req, res) {
       var homepageText = "Welcome to Club-Mix Creator. Available routes: ['/', '/login', '/lookup']"
       res.render('pages/index.ejs', { message: homepageText });
     });
 
+    // ROUTE: /Lookup
     app.get('/lookup', function (req, res) {
       res.render('pages/lookup.ejs', {message: ""}); 
     });
@@ -26,24 +28,19 @@ module.exports = function(echo, app, passport) {
       }
     });
 
-    app.get('/songSearch/:id', function(req, res) {
-      id = req.params.id
-      echo('song/profile').get({
-        id: id,
-        bucket: 'audio_summary'
-      }, function (err, json) {
-        audio_summary = json.response['songs'][0]['audio_summary'];
-        console.log(audio_summary); 
-        res.send(audio_summary);
-      });
-    });
+    // app.get('/songSearch/:id', function(req, res) {
+    //   id = req.params.id
+    //   echo('song/profile').get({
+    //     id: id,
+    //     bucket: 'audio_summary'
+    //   }, function (err, json) {
+    //     audio_summary = json.response['songs'][0]['audio_summary'];
+    //     console.log(audio_summary); 
+    //     res.send(audio_summary);
+    //   });
+    // });
 
-    app.post('/login', passport.authenticate('local-login', {
-        successRedirect : '/profile',
-        failureRedirect : '/login',
-        failureFlash : true
-    }));
-
+    // ROUTE: /Login
     app.get('/login', function(req, res) {
         res.render('pages/login.ejs', { message: req.flash('loginMessage') }); 
     });
@@ -54,6 +51,7 @@ module.exports = function(echo, app, passport) {
         failureFlash : true
     }));
 
+    // ROUTE: /Signup
     app.get('/signup', function(req, res) {
         res.render('pages/signup.ejs', { message: req.flash('signupMessage') });
     });
@@ -64,12 +62,14 @@ module.exports = function(echo, app, passport) {
         failureFlash : true
     }));
 
+    // ROUTE: /profile
     app.get('/profile', isLoggedIn, function(req, res) {
         res.render('pages/profile.ejs', {
             user : req.user
         });
     });
 
+    // ROUTE: /logout
      app.get('/logout', function(req, res) {
         req.logout();
         res.redirect('/');
