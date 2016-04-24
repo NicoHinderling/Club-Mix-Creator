@@ -13,10 +13,13 @@
     "ejs": "^2.4.1",
     "express": "^4.13.4",
     "express-session": "^1.13.0",
+    "fs": "0.0.2",
     "mongoose": "^4.4.9",
     "morgan": "^1.7.0",
     "passport": "^0.3.2",
-    "passport-local": "^1.0.0"
+    "passport-local": "^1.0.0",
+    "youtube-audio-stream": "0.0.22",
+    "ytdl-core": "^0.7.14"
   },
   "devDependencies": {},
   "scripts": {

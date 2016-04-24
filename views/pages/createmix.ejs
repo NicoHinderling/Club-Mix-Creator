@@ -1,0 +1,33 @@
+<!doctype html>
+<html>
+<head>
+    <% include ../partials/head %>
+</head>
+<body>
+    <div class="container">
+        <div class="col-sm-6 col-sm-offset-3">
+            <h1><span class="fa fa-sign-in"></span> Create Mix</h1>
+            <!-- show if youtube link is not valid -->
+                <% if (message.length > 0) { %>
+                  <div class="alert alert-danger"> <%= message %> </div>
+                <% } %>
+                <div class="text-center">
+                    <img id="loader" src="img/loader.gif" style="width: 50px;">
+                </div>
+
+                <h3> Current Songs: </h3>
+                <ul id="currentList"></ul>
+                <br>
+                <div class="form-group">
+                    <label>Youtube Link</label>
+                    <input id="youtubeLinkInput" type="text" class="form-control" name="ytlink">
+                </div>
+                <button id="addNewLink" class="btn btn-success btn-lg">Add</button>
+                <button id="makeMix" class="btn btn-primary btn-lg">Make Mix!</button>
+        </div>
+    </div>
+</body>
+<footer>
+    <% include ../partials/footer %>
+</footer>
+</html>

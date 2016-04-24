@@ -28,17 +28,17 @@ module.exports = function(echo, app, passport) {
       }
     });
 
-    // app.get('/songSearch/:id', function(req, res) {
-    //   id = req.params.id
-    //   echo('song/profile').get({
-    //     id: id,
-    //     bucket: 'audio_summary'
-    //   }, function (err, json) {
-    //     audio_summary = json.response['songs'][0]['audio_summary'];
-    //     console.log(audio_summary); 
-    //     res.send(audio_summary);
-    //   });
-    // });
+    app.get('/songSearch/:id', function(req, res) {
+      id = req.params.id
+      echo('song/profile').get({
+        id: id,
+        bucket: 'audio_summary'
+      }, function (err, json) {
+        audio_summary = json.response['songs'][0]['audio_summary'];
+        console.log(audio_summary); 
+        res.send(audio_summary);
+      });
+    });
 
     // ROUTE: /Login
     app.get('/login', function(req, res) {
@@ -53,7 +53,9 @@ module.exports = function(echo, app, passport) {
 
     // ROUTE: /Signup
     app.get('/signup', function(req, res) {
-        res.render('pages/signup.ejs', { message: req.flash('signupMessage') });
+        res.render('pages/signup.ejs', { 
+          message: req.flash('signupMessage') 
+        });
     });
 
     app.post('/signup', passport.authenticate('local-signup', {
@@ -66,6 +68,13 @@ module.exports = function(echo, app, passport) {
     app.get('/profile', isLoggedIn, function(req, res) {
         res.render('pages/profile.ejs', {
             user : req.user
+        });
+    });
+
+    // ROUTE: /createmix
+    app.get('/createmix', isLoggedIn, function(req, res) {
+        res.render('pages/createmix.ejs', {
+            message: ""
         });
     });
 
@@ -83,8 +92,9 @@ module.exports = function(echo, app, passport) {
 };
 
 function isLoggedIn(req, res, next) {
-    if (req.isAuthenticated())
-        return next();
+    return next();
+    // if (req.isAuthenticated())
+    //     return next();
 
-    res.redirect('/');
+    // res.redirect('/');
 }
