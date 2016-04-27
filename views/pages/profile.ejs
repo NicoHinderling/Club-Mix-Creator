@@ -2,9 +2,10 @@
 <html>
 <head>
     <% include ../partials/head %>
-    <script src="/js/mixList.js"></script>
 </head>
 <body>
+<script   src="https://code.jquery.com/jquery-2.2.3.js"   integrity="sha256-laXWtGydpwqJ8JA+X9x2miwmaiKhn8tVmOVEigRNtP4="   crossorigin="anonymous"></script>
+<script src="/js/mixList.js"></script>
 <div class="container">
 
     <div class="page-header text-center">
@@ -14,10 +15,17 @@
 
     <div class="row">
         <div class="text-center">
-            <a href="/" class="btn btn-default btn-sm">Home</a>
+            <a href="/createmix" class="btn btn-default btn-sm">Create a new mix</a>
             <h1> </h1> <!-- What have I become -->
         </div>
-        <!-- LOCAL INFORMATION -->
+        <div class="col-sm-12">
+            <div class="well">
+                <h3> Mixes </h3>
+                <ul id="profileUserMixes"></ul>
+                <br>
+            </div>
+        </div>
+                <!-- LOCAL INFORMATION -->
         <div class="col-sm-12">
             <div class="well">
                 <h3><span class="fa fa-user"></span> User Info</h3>
@@ -28,14 +36,6 @@
                         <strong>password</strong>: <%= user.local.password %>
                     </p>
 
-            </div>
-        </div>
-        <div class="col-sm-12">
-            <div class="well">
-                <h3> Mixes </h3>
-                <ul id="profileUserMixes">
-                </ul>
-                <br>
             </div>
         </div>
     </div>

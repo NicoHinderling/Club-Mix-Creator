@@ -12,7 +12,6 @@ module.exports = {
     return User
       .findOne({ '_id': id }, 'userMixes')
       .then(user => {
-        console.log(user.userMixes);
         return user.userMixes;
     });
   }

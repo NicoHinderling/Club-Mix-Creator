@@ -10,31 +10,23 @@ var mime = require('mime');
 function makeid(strLength){
     var text = "";
     var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-
     for( var i=0; i < strLength; i++ )
         text += possible.charAt(Math.floor(Math.random() * possible.length));
-
     return text;
 }
 
 module.exports = function(echo, app, passport) {
     app.get('/', function(req, res) {
-      var homepageText = "Welcome to Club-Mix Creator!"
-      res.render('pages/index.ejs', { message: homepageText });
+      res.redirect('/profile');
     });
 
-    app.get('/userMixes', function(req, res) {
-      res.send(userMethods
+    app.get('/userMixes', isLoggedIn, function(req, res) {
+      userMethods
         .userMixes(req.user.id)
         .then(mixArray => {
           console.log(mixArray);
-          var titles = [];
-          for(i=0; i < mixArray.length; i++) {
-            titles.push(mixArray[i].title);
-          }
-
-          return titles;
-          }));
+          res.send(mixArray);
+        });
     });
 
     // ROUTE: /Login
@@ -62,7 +54,6 @@ module.exports = function(echo, app, passport) {
     }));
 
     // ROUTE: /profile
-        // userModel.findOne({ '_id': req.user.id }, 'userMixes', function(err, userMixes){
     app.get('/profile', isLoggedIn, function(req, res) {
       res.render('pages/profile.ejs', {
           user : req.user
@@ -147,7 +138,6 @@ module.exports = function(echo, app, passport) {
 
     app.get('/*', function(req, res){
       res.render('pages/404.ejs');
-        // throw new Error('This is a 500 Error');
     });
 
 };
