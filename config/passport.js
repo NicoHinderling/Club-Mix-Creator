@@ -49,6 +49,10 @@ module.exports = function(passport) {
                 if (err)
                     return done(err);
 
+                if (email.indexOf('@') < 0) {
+                    return done(null, false, req.flash('signupMessage', 'Not a valid email.'));
+                }
+
                 // check to see if theres already a user with that email
                 if (user) {
                     return done(null, false, req.flash('signupMessage', 'That email is already taken.'));

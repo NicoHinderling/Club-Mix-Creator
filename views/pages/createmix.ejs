@@ -18,12 +18,21 @@
                 <h3> Current Songs: </h3>
                 <ul id="currentList"></ul>
                 <br>
-                <div class="form-group">
+                <div id="mixName" class="form-group">
+                    <h3>Name Your Mix!</h3>
+                    <input id="mixInput" type="text" class="form-control" name="mixName">
+                    <br>
+                    <button id="mixAdd" class="btn btn-primary btn-lg">Create</button>
+                    <button id="addAnother" class="btn btn-danger btn-lg">Add Another Link</button>
+                </div>
+
+                <div id="youtubeLinks" class="form-group">
                     <label>Youtube Link</label>
                     <input id="youtubeLinkInput" type="text" class="form-control" name="ytlink">
+                    <br>
+                    <button id="addNewLink" class="btn btn-success btn-lg">Add</button>
+                    <button id="makeMix" class="btn btn-primary btn-lg">Submit</button>
                 </div>
-                <button id="addNewLink" class="btn btn-success btn-lg">Add</button>
-                <button id="makeMix" class="btn btn-primary btn-lg">Make Mix!</button>
         </div>
     </div>
 </body>

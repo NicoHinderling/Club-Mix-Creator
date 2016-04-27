@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <% include ../partials/head %>
+    <script src="/audiojs/audio.min.js"></script>
+    <link rel="stylesheet" href="/css/audiojs.css" media="screen">
+    <script>
+      audiojs.events.ready(function() {
+        audiojs.createAll();
+      });
+    </script>
+  </head>
+  <body>
+    <h2><strong>Title:</strong> <%= mixTitle %></h2>
+
+    <% if (audioID.length > 0) { %>
+      <audio src=<%= audioID %> preload="auto"></audio>
+    <% } %>
+
+    <form method="get" action=<%= downloadID %> name='<%= mixTitle %>'>
+      <h1> </h1>
+      <button type="submit" class="btn btn-primary">Download Mix</button>
+      <h1> </h1>
+    </form>
+    <br>
+    <a href="/"><button id="backProfile" class="btn btn-primary">Back home</button></a>
+    <a href="/createmix"><button id="anotherMix" class="btn btn-primary">Create another mix</button></a>
+  </body>
+</html>

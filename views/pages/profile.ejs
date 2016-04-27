@@ -2,6 +2,7 @@
 <html>
 <head>
     <% include ../partials/head %>
+    <script src="/js/mixList.js"></script>
 </head>
 <body>
 <div class="container">
@@ -12,11 +13,14 @@
     </div>
 
     <div class="row">
-
+        <div class="text-center">
+            <a href="/" class="btn btn-default btn-sm">Home</a>
+            <h1> </h1> <!-- What have I become -->
+        </div>
         <!-- LOCAL INFORMATION -->
-        <div class="col-sm-6">
+        <div class="col-sm-12">
             <div class="well">
-                <h3><span class="fa fa-user"></span> Local</h3>
+                <h3><span class="fa fa-user"></span> User Info</h3>
 
                     <p>
                         <strong>id</strong>: <%= user._id %><br>
@@ -26,7 +30,14 @@
 
             </div>
         </div>
-
+        <div class="col-sm-12">
+            <div class="well">
+                <h3> Mixes </h3>
+                <ul id="profileUserMixes">
+                </ul>
+                <br>
+            </div>
+        </div>
     </div>
 
 </div>

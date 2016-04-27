@@ -1,43 +1,40 @@
-// http://developer.echonest.com/api/v4/
+var fs = require('fs');
+var youtubeStream = require('youtube-audio-stream');
+
+var mixMethods = require('./config/mixMethods');
+var userMethods = require('./config/userMethods');
+
+var path = require('path');
+var mime = require('mime');
+
+function makeid(strLength){
+    var text = "";
+    var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+
+    for( var i=0; i < strLength; i++ )
+        text += possible.charAt(Math.floor(Math.random() * possible.length));
+
+    return text;
+}
 
 module.exports = function(echo, app, passport) {
-
-    // ROUTE: / (Default)
     app.get('/', function(req, res) {
-      var homepageText = "Welcome to Club-Mix Creator. Available routes: ['/', '/login', '/lookup']"
+      var homepageText = "Welcome to Club-Mix Creator!"
       res.render('pages/index.ejs', { message: homepageText });
     });
 
-    // ROUTE: /Lookup
-    app.get('/lookup', function (req, res) {
-      res.render('pages/lookup.ejs', {message: ""}); 
-    });
+    app.get('/userMixes', function(req, res) {
+      res.send(userMethods
+        .userMixes(req.user.id)
+        .then(mixArray => {
+          console.log(mixArray);
+          var titles = [];
+          for(i=0; i < mixArray.length; i++) {
+            titles.push(mixArray[i].title);
+          }
 
-    app.post('/lookup', function(req, res) {
-      console.log(req.body.title);
-      console.log(req.body.artist);
-      if (req.body.artist === '' || req.body.title === '') {
-        console.log("broke");
-        res.render('pages/lookup.ejs', {message: "Please include both a song name and title"});
-      }
-      else {
-        lookupParams = {title: req.body.title, artist: req.body.artist}
-        echo('song/search').get(lookupParams, function (err, json) {
-          res.render('pages/results.ejs', { results: json.response['songs']}); 
-        });
-      }
-    });
-
-    app.get('/songSearch/:id', function(req, res) {
-      id = req.params.id
-      echo('song/profile').get({
-        id: id,
-        bucket: 'audio_summary'
-      }, function (err, json) {
-        audio_summary = json.response['songs'][0]['audio_summary'];
-        console.log(audio_summary); 
-        res.send(audio_summary);
-      });
+          return titles;
+          }));
     });
 
     // ROUTE: /Login
@@ -65,10 +62,11 @@ module.exports = function(echo, app, passport) {
     }));
 
     // ROUTE: /profile
+        // userModel.findOne({ '_id': req.user.id }, 'userMixes', function(err, userMixes){
     app.get('/profile', isLoggedIn, function(req, res) {
-        res.render('pages/profile.ejs', {
-            user : req.user
-        });
+      res.render('pages/profile.ejs', {
+          user : req.user
+      });
     });
 
     // ROUTE: /createmix
@@ -84,17 +82,79 @@ module.exports = function(echo, app, passport) {
         res.redirect('/');
     });
 
+    app.post('/submitSongs', isLoggedIn, function(req, res) {
+      for(i=0; i < req.body.songs.length; i++){
+        console.log(req.body.songs[i]);
+      };
+      var songId = makeid(10);
+      while(fs.existsSync(__dirname + '/mixes/' + songId + '.mp3')) {
+        songId = makeid(10);
+      };
+      var songFile = fs.createWriteStream(__dirname + '/mixes/' + songId + '.mp3');
+
+      function audioConcat() {
+        if (!req.body.songs.length) {
+          res.send("/mix/" + songId);
+          songFile.end("Done");
+          return;
+        }
+        currentfile = req.body.songs.shift();
+        stream = youtubeStream(currentfile);
+        stream.pipe(songFile, {end: false});
+        stream.on("end", function() {
+          console.log(currentfile + ' appended');
+          audioConcat();        
+        });
+      }
+      audioConcat();
+      mixMethods.createMix(songId, req.body.mixName);
+      userMethods.addNewMix(req.user.id, songId, req.body.mixName);
+    });
+
+    app.get('/download/:id', function(req, res){
+      var file = __dirname + '/mixes/' + req.params.id + '.mp3';
+      var mimetype = mime.lookup(file);
+
+      mixMethods
+        .mixTitle(req.params.id)
+        .then(mixTitle => res.setHeader('Content-disposition', 'attachment; filename=' + mixTitle + '.mp3'));
+
+      res.setHeader('Content-type', mimetype);
+
+      var filestream = fs.createReadStream(file);
+      filestream.pipe(res);
+    });
+
+    app.get('/mix/:id', function (req, res) {
+      if(fs.existsSync(__dirname + '/mixes/' + req.params.id + '.mp3')) {
+        mixMethods
+          .mixTitle(req.params.id)
+          .then(mixTitle => 
+            res.render('pages/mix.ejs', {
+              'mixTitle': mixTitle,
+              "audioID": '/mixes/' + req.params.id + '.mp3',
+              "downloadID": '/download/' + req.params.id
+            }));
+      } else {
+        res.render('pages/mixNotFound.ejs');
+      }
+    });
+
     app.get('/500', function(req, res){
         console.log("500 hit");
         throw new Error('This is a 500 Error');
     });
 
+    app.get('/*', function(req, res){
+      res.render('pages/404.ejs');
+        // throw new Error('This is a 500 Error');
+    });
+
 };
 
 function isLoggedIn(req, res, next) {
-    return next();
-    // if (req.isAuthenticated())
-    //     return next();
+    if (req.isAuthenticated())
+        return next();
 
-    // res.redirect('/');
+    res.redirect('/login');
 }

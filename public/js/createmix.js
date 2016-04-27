@@ -1,4 +1,6 @@
 $('#loader').hide();
+$('#mixName').hide();
+
 var songList = document.getElementById("currentList");
 
 $('#addNewLink').click(function() {
@@ -24,22 +26,41 @@ $('#addNewLink').click(function() {
 
 $('#makeMix').click(function() {
   var listItems = songList.getElementsByTagName('li');
-  var formList = [];
   if(listItems.length > 0) {
-    $('#loader').show();
-    for(i=0; i < listItems.length; i++){
-      formList.push(listItems[i].firstChild.textContent);
-      console.log(listItems[i].firstChild.textContent);
-    }
-    $.ajax({
-      url: 'http://www.localhost:3000/submitSongs',
-      data: {songs: formList},
-      type: 'POST',
-    }).done (function(data){
-      console.log("done");
-      // console.log(data);
-    });
+    $('#mixName').show();
+    $('#youtubeLinks').hide();
   } else {
     alert("Please input at least one song.");
+  }
+});
+
+$('#addAnother').click(function() {
+  $('#mixName').hide();
+  $('#youtubeLinks').show();
+});
+
+$('#mixAdd').click(function(){
+  var mixInput = document.getElementById("mixInput").value;
+  var listItems = songList.getElementsByTagName('li');
+  var formList = [];
+
+  if(mixInput.length > 0) {
+    if(mixInput.length > 100) {
+      alert("Title is too long!");
+    } else {
+      $('#loader').show();
+      for(i=0; i < listItems.length; i++){
+        formList.push(listItems[i].firstChild.textContent);
+      }
+      $.ajax({
+        url: '/submitSongs',
+        data: {songs: formList, mixName: mixInput},
+        type: 'POST',
+      }).done (function(data){
+        window.location.href = data;
+      });
+    }
+  } else {
+    alert("Please name your mix.");
   }
 });

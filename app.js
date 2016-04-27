@@ -14,17 +14,9 @@ var express  = require('express')
   , port     = process.env.PORT || 3000
   , echo = echojs({ key: process.env.ECHONEST_KEY });
 
-var fs = require('fs');
 
-function makeid(strLength){
-    var text = "";
-    var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-
-    for( var i=0; i < strLength; i++ )
-        text += possible.charAt(Math.floor(Math.random() * possible.length));
-
-    return text;
-}
+app.use("/mixes", express.static(__dirname + '/mixes'));
+app.use("/audiojs", express.static(__dirname + '/audiojs'));
 
 var allowCrossDomain = function(req, res, next) {
     res.header('Access-Control-Allow-Origin', 'http://127.0.0.1:3000');
@@ -50,46 +42,6 @@ app.use(flash());
 app.use(allowCrossDomain);
 //Routes
 require('./routes.js')(echo, app, passport);
-
-var fs = require('fs');
-var youtubeStream = require('youtube-audio-stream');
-
-app.post('/submitSongs', function(req, res) {
-  var listItems = req.body.songs;
-  console.log(listItems)
-  for(i=0; i < listItems.length; i++){
-    console.log(listItems[i]);
-  };
-
-  try {
-    youtubeStream(requestUrl).pipe(res)
-  } catch (exception) {
-    res.status(500).send(exception)
-  }
-
-
-  var data = {"nico": "meow"};
-  // res.writeHead(200, { 'Content-Type': 'application/json' }); 
-  // res.end(JSON.stringify(data));
-  // res.render('pages/index.ejs', {
-  //     message: "nah"
-  // });
-});
-
-app.get('/tunes', function(req, res) {
-  var requestUrl = 'https://www.youtube.com/watch?v=s-mOy8VUEBk'
-  // var requestUrl = 'http://youtube.com/watch?v=' + req.params.videoId
-  try {
-    youtubeStream(requestUrl).pipe(res)
-  } catch (exception) {
-    res.status(500).send(exception)
-  }
-});
-    // .pipe(fs.createWriteStream('video.flv'));
-    // res.render('pages/createmix.ejs', {
-    //     user : req.user,
-    //     message: "you're dope"
-    // });
 
 app.listen(port);
 console.log('Now running on port: ' + port);

@@ -9,7 +9,11 @@ var userSchema = mongoose.Schema({
     local            : {
         email        : String,
         password     : String,
-    }
+    },
+    userMixes        : [{
+        title        : String,
+        mix_id       : String
+    }]
 });
 
 // methods ======================
