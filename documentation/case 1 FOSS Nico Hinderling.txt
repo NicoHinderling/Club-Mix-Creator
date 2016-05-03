@@ -1,0 +1,14 @@
+CS411 Fall 2015 Case 1
+by Nico Hinderling
+
+1.) The complexity described in this article is typical if not less complex than the average dev group. The architecture of a business’s technologies can get much more massive than this.
+
+2.) They were using Selenium to perform integration tests, but they ran into timeout failures on certain native click activities.
+
+3.) The tracking toolset they used had such a large emphasis because it ensured the eventual outcome of these requirements. These are user stories which foreshadow that the company and product eventually want to achieve. Guaranteeing their success thus is naturally valuable!
+
+4.) I’ve read several developer options about how Agile processes and Continuous Integration are detrimental to the devs themselves. The concern is that this fast paced environment puts too much pressure on the coders and can effectively undermine their productivity. I would disagree with this, but it may very well be because I’m young and haven’t been exposed to years of 80 hour weeks ;P
+
+5.) The project environment is more than sustainable. The toolset is large (even intimidating at first), but it’s important to remember the purposes of these pieces. They are there to ensure a more productive and *effective* work setting. I would be shocked if any Fortune 500 companies didn’t have these tools.
+
+6.) They’ve built up a large toolset and with that comes the pros and cons. The obvious cons are that transitions aren’t easy (as they take time) and that potential Open Source Software issues could set them back a ways with needs to maintain compatibility, stability, and more.

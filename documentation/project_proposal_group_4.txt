@@ -1,0 +1,27 @@
+Primary Idea:
+—————————————
+Name: CLUB-DJ
+
+So the few times I’ve been to clubs, I’ve noticed that DJs literally just string songs with drops together.
+
+…So it’s like: SONG 1 buildup -> SONG 1 drop -> SONG 2 buildup -> SONG 2 drop
+
+The idea is this: Have the web application where a user can drop a couple of songs in (say 3-10 for example). The app would look at the audio data, figure out where the drops are, and then return to the user a mix of just pure buildups and drops. We could even go more ham and do cool additional stuff like sequencing the BPM of different songs (either completely or during the transitions) so the transitions feel more flush. The same goes for the pitch of each song. We could change the pitches of certain songs so that the final mix would be completely in one key.
+
+APIs: Web Audio API and either Minim or SonicAPI … audio processing APIs are neat but complex so we’ll probably do a bit more research
+
+
+Backup Idea:
+————————————
+Name: Minin’ Time
+
+I think bitcoin is super cool, but configuring the set up of actually mining can be kind of tricky… to do it right you have to join a ‘mining pool’ and set up the hashing.. it’s not trivial… so the idea is this: Making a web app that someone could connect their computer to and it would basically manage the whole process for you. The user would just request with the cpu labor and then they would make 90%/95% of the profit. We could just skim a bit off the top :)
+
+APIs: Blockchain API, BitcoinJS, and Bitcore
+
+
+General Info about Projects:
+============================
+- Both will be written in Node, and will use MongoDB
+
+Group Members: Nico Hinderling, Ryan Walsh, Addie Camp, and Jasmine Hu
